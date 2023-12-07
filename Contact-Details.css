@@ -1,0 +1,77 @@
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/*HEADER SECTION*/
+
+header{
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: rgb(31, 41, 55);
+}
+
+header > img{
+    height: 30px;
+}
+
+h1{
+    display: inline-block;
+    color: white;
+    font-size: 18px;
+    margin-left: 5px;
+}
+
+/*BODY SECTION*/
+
+main{
+    display: grid;
+    margin-top: 10px;
+    grid-template-columns: 20% 75%;
+    grid-gap: 10px;
+}
+
+/*SIDE BAR*/
+
+ul{
+    list-style-type: none;
+}
+
+li > a{
+    text-decoration: none;
+    color: black;
+}
+
+li > img{
+    margin-right: 5px;
+}
+
+/*CONTACT DETAILS*/
+
+#Details{
+    margin-top: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: grey;
+}
+
+/*CONTACT NOTES*/
+
+#Notes{
+    margin-top: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: grey;
+}
+
+#Add-notes{
+    background-color: lightgrey;
+}
+
+#Add-notes > *{
+    margin-left: 9px;
+}
+
+textarea{
+    width: 98%;
+    height: auto;
+}
