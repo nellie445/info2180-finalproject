@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="test4working.css">
+  <title>Contact Notes</title>
+  <style>
+    .align-right{
+        text-align: right;
+        border:0;
+    }
+  </style>
+</head>
+<body>
+  <!--<div class="contact-details">
+    <h2>Notes</h2>-->
+    <!-- Other contact details go here -->
+
+    <div class="notes-section">
+      <h3>Notes</h3>
+      <div class="existing-notes">
+        <!-- Display existing notes for the contact -->
+        <div class="note">
+          <p>Note content...</p>
+          <span class="datetime">2023-12-02 3:45 PM</span>
+        </div>
+        <!-- Repeat for each existing note -->
+      <!--</div>-->
+
+      <!-- Form to add a new note -->
+      <form id="noteForm">
+        <label for="noteContent">Add Note:</label>
+        <textarea id="noteContent" name="noteContent" rows="4" required></textarea>
+        <div class="align-right">
+        <button type="button" onclick="saveNote()">Add Note</button>
+      </div>
+    </form>
+    </div>
+  </div>
+
+ <script src="testing.js"></script> 
+</body>
+</html>
