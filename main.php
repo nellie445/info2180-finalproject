@@ -21,7 +21,7 @@ switch ($type) {
 
         break;
 
-    case 'userlogin':
+    case 'adduser':
         $firstname = $_GET['firstname'];
         $lastname = $_GET['lastname'];
         $email = $_GET['email'];
@@ -122,23 +122,34 @@ switch ($type) {
         $type = $_GET("type");
         $updated_at = time();
         $email = $_GET('email');
-        $stmt = $conn->query("SELECT users.id, users.firstname, users.lastname, orders.order_date, notes.created_by, notes.comment FROM notes JOIN users ON notes.created_by = notes.id JOIN contacts ON notes.product_id = contact_id.product_id WHERE contacts.email = '%$email%'");
+        $stmt = $conn->query("SELECT users.id, users.firstname, users.lastname, orders.order_date, notes.created_by, notes.comment FROM notes JOIN users ON notes.created_by = notes.id JOIN contacts ON notes.contact_id = constacts.id WHERE contacts.email = '%$email%';");
 
-        
-
+    
 
 
         break;
 
-    case 'switch':
+    case 'addnote':
+        $id = $_SESSION['id'];
+        $created_at = time();    
+        $comment = $_GET("comment");
+        $userid = $_GET("userid");
+        
 
-
+        $stmt = $conn->query("INSERT INTO notes (firstname, lastname, email, telephone, company, type, assigned_to, created_by, created_at, updated_at) VALUES ('$firstname', '$lastname', '$email', '$telephone', '$company', '$type', '$assigned_to', '$created_by', '$created_at', '$updated_at');");
         break;
     
     default:
+
         # code...
         break;
+
 }
+
+
+$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
 
 
 
