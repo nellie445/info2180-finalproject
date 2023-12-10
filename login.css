@@ -1,0 +1,64 @@
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/*HEADER SECTION*/
+
+header{
+    margin-left: -10px;
+    margin-right: -10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: -8px;
+    background-color: rgb(31, 41, 55);
+}
+
+header > img{
+    height: 30px;
+}
+
+h1{
+    display: inline-block;
+    color: white;
+    font-size: 18px;
+    margin-left: 5px;
+}
+
+/*body section*/
+
+h2{
+    margin-top: 50px;
+    font-size: 50px;
+}
+
+input{
+    display: block;
+    margin: 15px auto 15px auto;
+    width: 25%;
+    height: 25px;
+    border-radius: 5px;
+    border-color: lightgray;
+}
+
+main{
+    text-align: center;
+}
+
+button{
+    width: 25%;
+    height: 25px;
+    background-color: #4f46e5;
+    border-radius: 5px;
+    border-color: transparent;
+    color: white;
+}
+
+/*footer section*/
+#copyright{
+    text-align: center;
+    margin-top: 50px;
+    border-style: solid;
+    border-width: 0;
+    border-top-width: 1px;
+    border-color: lightgrey;
+}
