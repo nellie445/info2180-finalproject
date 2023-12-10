@@ -26,6 +26,8 @@ CREATE TABLE `users` (
 
 
 
+
+
 DROP TABLE IF EXISTS `contacts`;
 CREATE TABLE `contacts` (
     `id` int(11) NOT NULL auto_increment,
