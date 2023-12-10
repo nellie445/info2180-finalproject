@@ -54,33 +54,8 @@ li > img{
     height: 20px;
 }
 
-/*CONTACT DETAILS*/
+/*Welcome Section*/
 
-#Details{
-    margin-top: 5px;
-    border-style: solid;
-    border-width: 1px;
-    border-color: grey;
-}
-
-/*CONTACT NOTES*/
-
-#Notes{
-    margin-top: 5px;
-    border-style: solid;
-    border-width: 1px;
-    border-color: grey;
-}
-
-#Add-notes{
-    background-color: lightgrey;
-}
-
-#Add-notes > *{
-    margin-left: 9px;
-}
-
-textarea{
-    width: 98%;
-    height: auto;
+#welcome{
+    text-align: center;
 }
