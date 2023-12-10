@@ -5,19 +5,24 @@ session_start();
 $host = 'localhost';
 $username = 'lab5_user';
 $password = 'password123';
-$dbname = 'world';
+$dbname = 'dolphin_crm';
 
 
-$type = $_GET['querytypes']
+$type = $_GET['querytypes'];
+echo $type;
 $queryTypes = isset($_GET['querytypes']) ? $_GET['querytypes'] : null;
 
 $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
 
 switch ($type) {
-    case 'userlogin':
+    case "userlogin":
         $email = $_GET['email'];
         $password = $_GET['passord'];   
         $stmt = $conn->query("SELECT * FROM user WHERE user.email = '%$email%'AND user.passord = '%$password%';");
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        echo 1;
+
 
         break;
 
@@ -39,15 +44,15 @@ switch ($type) {
 
     case 'listuser':
         $stmt = $conn->query("SELECT * FROM user WHERE user.email = '%$email%'AND user.passord = '%$password%';");
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         break;
     case 'userlogout':
-        session_destroy()
-    
+        session_destroy();
         break;
     case 'dashboard':
         $select = $_GET('select');
-        $type = $_GET('type')
+        $type = $_GET('type');
 
         if ($select == "all"){
 
@@ -57,10 +62,13 @@ switch ($type) {
             $stmt = $conn->query("SELECT * FROM contacts WHERE contacts.type = '%$type%';");
         }
 
-        elseif ($type != ""){
-            $id = $_SESSION['id']
+        elseif ($type == ""){
+            $id = $_SESSION['id'];
             $stmt = $conn->query("SELECT * FROM contacts WHERE contacts.assigned_to = '%$id%';");
         }
+
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
         
 
 
@@ -70,7 +78,8 @@ switch ($type) {
 
         $stmt = $conn->query("SELECT assigned_to FROM contacts;");
 
-    
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+   
         break;
     
     case 'newcontact':
@@ -101,16 +110,16 @@ switch ($type) {
     case 'assign':
         $assigned_to = $_SESSION['id'];
         $updated_at = time();
-        $email = $_GET('email')
+        $email = $_GET('email');
         $stmt = $conn->query("UPDATE contacts SET assigned_to = '%$assigned_to%', updated_at = '%$updated_at%' WHERE   contacts.email = '%$email%'");
 
 
         break;
 
     case 'switch':
-        $type = $_GET("type")
+        $type = $_GET("type");
         $updated_at = time();
-        $email = $_GET('email')
+        $email = $_GET('email');
         $stmt = $conn->query("UPDATE contacts SET type = '%$type%', updated_at = '%$$updated_at%' WHERE contacts.email = '%$$email%'");
 
 
@@ -123,6 +132,7 @@ switch ($type) {
         $updated_at = time();
         $email = $_GET('email');
         $stmt = $conn->query("SELECT users.id, users.firstname, users.lastname, orders.order_date, notes.created_by, notes.comment FROM notes JOIN users ON notes.created_by = notes.id JOIN contacts ON notes.contact_id = constacts.id WHERE contacts.email = '%$email%';");
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     
 
@@ -140,14 +150,17 @@ switch ($type) {
         break;
     
     default:
+    echo "default";
 
-        # code...
+
+
+
+
         break;
 
 }
 
 
-$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
 
