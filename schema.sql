@@ -31,6 +31,12 @@ INSERT INTO `users` (`id`,`firstname`, `lastname`, `password`,`email`, `role`) V
 UNLOCK TABLES;
 
 
+-- INSERT INTO notes (contact_id, comment, created_by, created_at)
+-- VALUES
+-- (2, 'Comment for contact 1', 2, NOW()),
+-- (2, 'Comment for contact 2', 1, NOW()),
+-- (4080, 'Comment for contact 1', 2, NOW()),
+-- (4080, 'Comment for contact 2', 1, NOW());
 
 DROP TABLE IF EXISTS `contacts`;
 CREATE TABLE `contacts` (

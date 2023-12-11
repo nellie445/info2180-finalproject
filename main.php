@@ -147,18 +147,6 @@ switch ($type) {
         $created_by = $_SESSION['id'];
 
 
-        echo "Title: $title<br>";
-        echo "First Name: $firstname<br>";
-        echo "Last Name: $lastname<br>";
-        echo "Email: $email<br>";
-        echo "Telephone: $telephone<br>";
-        echo "Company: $company<br>";
-        echo "Type: $type<br>";
-        echo "Assigned To: $assigned_to<br>";
-        echo "Created By: $created_by<br>";
-
-
-
         $stmt = $conn->prepare("INSERT INTO contacts (title, firstname, lastname, email, telephone, company, type, assigned_to, created_by) VALUES (:title, :firstname, :lastname, :email, :telephone, :company, :type, :assigned_to, :created_by)");
 
         $stmt->bindParam(':title', $title);
@@ -183,18 +171,29 @@ switch ($type) {
     case 'assign':
         $assigned_to = $_SESSION['id'];
         $updated_at = time();
-        $email = $_GET('email');
-        $stmt = $conn->query("UPDATE contacts SET assigned_to = '%$assigned_to%', updated_at = '%$updated_at%' WHERE   contacts.email = '%$email%'");
+        $email = $_GET['email'];
+        $stmt = $conn->prepare("UPDATE contacts SET assigned_to = '$assigned_to', updated_at = '$updated_at' WHERE email = '$email'");
+
+        if ($stmt->execute()) {
+            echo "assigned created successfully";
+        } else {
+            echo "Error: " . $stmt->error;
+        }
 
 
         break;
 
     case 'switch':
-        $type = $_GET("type");
+        $type = $_GET["type"];
         $updated_at = time();
-        $email = $_GET('email');
-        $stmt = $conn->query("UPDATE contacts SET type = '%$type%', updated_at = '%$updated_at%' WHERE contacts.email = '%$email%'");
+        $email = $_GET['email'];
+        $stmt = $conn->prepare("UPDATE contacts SET type = '$type', updated_at = '$updated_at' WHERE contacts.email = '$email'");
 
+        if ($stmt->execute()) {
+            echo "New record created successfully";
+        } else {
+            echo "Error: " . $stmt->error;
+        }
 
         break;
 
@@ -206,11 +205,16 @@ switch ($type) {
     case 'listnote':
 
 
-        $type = $_GET("type");
         $updated_at = time();
-        $email = $_GET('email');
-        $stmt = $conn->query("SELECT users.id, users.firstname, users.lastname, orders.order_date, notes.created_by, notes.comment FROM notes JOIN users ON notes.created_by = notes.id JOIN contacts ON notes.contact_id = constacts.id WHERE contacts.email = '%$email%';");
+        $email = $_GET['email'];
+        $stmt = $conn->query("SELECT users.id, users.firstname, users.lastname, notes.created_by, notes.comment, notes.created_at FROM notes JOIN users ON notes.created_by = users.id JOIN contacts ON notes.contact_id = contacts.id WHERE contacts.email = '$email';");
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        
+        foreach ($results as $result) {
+            print_r($result);
+            echo $result["firstname"] . " " . $result["lastname"] . " " . $result["comment"] . " " . $result["created_at"];
+        }  
 
     
 
@@ -219,12 +223,20 @@ switch ($type) {
 
     case 'addnote':
         $id = $_SESSION['id'];
-        $created_at = time();    
-        $comment = $_GET("comment");
-        $userid = $_GET("userid");
+        $created_at = time();
+        $comment = $_GET['comment'];
+        $contact_id = $_GET['contact_id'];
         
+        $stmt = $conn->prepare("INSERT INTO notes (contact_id ,comment, created_by) VALUES ( :contact_id, :comment, :created_by)");
+        $stmt->bindParam(':contact_id', $contact_id);
+        $stmt->bindParam(':comment', $comment);
+        $stmt->bindParam(':created_by', $id);
+        
+        if ($stmt->execute()) {
+            echo "New note created successfully";
+        } else {
+        }
 
-        $stmt = $conn->query("INSERT INTO notes (firstname, lastname, email, telephone, company, type, assigned_to, created_by, created_at, updated_at) VALUES ('$firstname', '$lastname', '$email', '$telephone', '$company', '$type', '$assigned_to', '$created_by', '$created_at', '$updated_at');");
         break;
     
     default:
