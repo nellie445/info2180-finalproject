@@ -83,31 +83,37 @@ switch ($type) {
         break;
     case 'userlogout':
 
-        echo $_SESSION['id'];
         session_destroy();
-        echo $_SESSION['id'];
 
         break;
     case 'dashboard':
-        $select = $_GET('select');
-        $type = $_GET('type');
+
+        $select = $_GET['select'];     
+
+        $types = $_GET['type'];
 
         if ($select == "all"){
 
             $stmt = $conn->query("SELECT * FROM contacts;");
 
-        } elseif ($type != ""){
-            $stmt = $conn->query("SELECT * FROM contacts WHERE contacts.type = '%$type%';");
+        } elseif ($select == "type"){
+            $stmt = $conn->query("SELECT * FROM contacts WHERE contacts.type = '$types';");
         }
 
-        elseif ($type == ""){
+        elseif ($select == "assigned"){
             $id = $_SESSION['id'];
-            $stmt = $conn->query("SELECT * FROM contacts WHERE contacts.assigned_to = '%$id%';");
+            $stmt = $conn->query("SELECT * FROM contacts WHERE contacts.assigned_to = '$id';");
+        } else {
+            echo "No item chosen";
         }
+
 
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        
+
+        foreach ($results as $result) {
+            print_r($result);
+        }        
 
 
     
@@ -158,7 +164,7 @@ switch ($type) {
         $type = $_GET("type");
         $updated_at = time();
         $email = $_GET('email');
-        $stmt = $conn->query("UPDATE contacts SET type = '%$type%', updated_at = '%$$updated_at%' WHERE contacts.email = '%$$email%'");
+        $stmt = $conn->query("UPDATE contacts SET type = '%$type%', updated_at = '%$updated_at%' WHERE contacts.email = '%$email%'");
 
 
         break;
