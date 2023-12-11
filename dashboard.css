@@ -90,13 +90,14 @@ tr th{
 }
 
 
-header > img{
+header img{
     height: 30px;
     width: 30px;
 }
 
 header{
     margin-left: -10px;
+    
     margin-right: -10px;
     padding-left: 10px;
     padding-right: 10px;
