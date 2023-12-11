@@ -21,10 +21,12 @@ header > img{
 }
 
 h1{
-    display: inline-block;
+    display: flex;
+    align-items: flex-start;
     color: white;
     font-size: 18px;
     margin-left: 5px;
+    margin-top: -200px;
 }
 
 /*Side Bar*/
