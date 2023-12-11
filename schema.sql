@@ -1,7 +1,7 @@
 -- MySQL dump 10.11
 --
 -- to install this database, from a terminal, type:
--- mysql -u USERNAME -p -h SERVERNAME world < schema.sql
+-- mysql -u USERNAME -p -h SERVERNAME dolphin_crm < schema.sql
 --
 -- Host: localhost    Database: dolphin_crm
 
@@ -24,7 +24,11 @@ CREATE TABLE `users` (
     PRIMARY KEY  (`id`)
 )  ENGINE=MyISAM AUTO_INCREMENT=4080 DEFAULT CHARSET=utf8mb4;
 
+LOCK TABLES `users` WRITE;
 
+INSERT INTO `users` (`id`,`firstname`, `lastname`, `password`,`email`, `role`) VALUES (1,'Prime', 'Admin', 'StandardAdminPassword', 'Admin@email.com','Admin');
+
+UNLOCK TABLES;
 
 
 
@@ -56,3 +60,6 @@ CREATE TABLE `notes` (
     `created_at` datetime NOT NULL default SYSDATE(),
     Primary KEY (`id`)
 )  ENGINE=MyISAM AUTO_INCREMENT=4080 DEFAULT CHARSET=utf8mb4;
+
+GRANT ALL PRIVILEGES ON dolphin_crm.* TO 'FinalProject_user'@'localhost' 
+IDENTIFIED BY 'password123';
