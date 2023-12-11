@@ -16,10 +16,10 @@
     <div class="body">
         <div class="table-options">
             <h3>Filter By:</h3>
-            <h3 class="filters">All</h3>
-            <h3 class="filters">Sales Leads</h3>
-            <h3 class="filters">Support</h3>
-            <h3 class="filters">Assigned to me</h3>
+            <h3 id="all" class="filters">All</h3>
+            <h3 id="sales" class="filters">Sales Leads</h3>
+            <h3 id="support" class="filters">Support</h3>
+            <h3 id="assign" class="filters">Assigned to me</h3>
         </div>
 
         <table>
@@ -31,7 +31,7 @@
                     <th>Type</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="tbody">
                 <tr>
                     <td id="name">carlyon</td>
                     <td>carlyon$gmial.com</td>
@@ -49,5 +49,6 @@
 
     </div>
 </section>
+    <script src="dashboard.js"></script>
 </body>
 </html>

@@ -111,10 +111,6 @@ switch ($type) {
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
-        foreach ($results as $result) {
-            print_r($result);
-        }        
-
 
     
         break;
@@ -286,6 +282,21 @@ switch ($type) {
     <?php endforeach; ?>
   </tbody>
 </table>
+
+<?php else: ?>
+<?php endif; ?>
+
+<?php if ($type == 'dashboard'): ?>
+
+    <?php foreach ($results as $result): ?>
+    <tr>
+      <td><?= $result['firstname'] . " " . $result['lastname'] ; ?></td>
+      <td><?= $result['email']; ?></td>
+      <td><?= $result['company']; ?></td>
+      <td><?= $result['type']; ?></td>
+    </tr>
+    <?php endforeach; ?>
+
 
 <?php else: ?>
 <?php endif; ?>
