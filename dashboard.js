@@ -90,3 +90,24 @@ function linkadder(){
 }
 
 
+
+function fetcher3(){
+    console.log("main.php?querytypes=dashboard&select=${type}&type=${select}")
+    fetch("main.php?querytypes=getCUsr")
+    .then(response => response.text())
+    .then(data => {
+        
+
+        console.log(data);
+
+
+
+
+    }
+    ) 
+    .catch(error => console.error("Error", error));
+
+}
+
+
+fetcher3()
