@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dolphin CRM</title>
+    <link rel="stylesheet" href="NewUser.css">
+    <style>
+        .align-right{
+            text-align: right;
+            border:0;
+        }
+      </style>
+</head>
+<body>
+
+    <header>
+        <img src="DolphinLogo.png" alt="Dolphin Logo" width="100">
+        <h1>Dolphin CRM</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><img src="home-pin.png" alt="Home-Image" class=""><a href="">Home</a></li>
+            <li><img src="new-contact-pin.png" alt="New-Contact-Image" class=""><a href="">New Contac</a>t</li>
+            <li><img src="user-pin.png" alt="Users-Image" class=""><a href="">Users</a></li>
+            <li><img src="logout-pin.png" alt="Logout-Image" class=""><a href="">Logout</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <h2>New User</h2>
+        <form>
+            <div class="form-group">
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" name="firstName" required>
+            </div>
+    
+            <div class="form-group">
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" name="lastName" required>
+            </div>
+    
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+    
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+    
+            <div class="form-group">
+                <label for="role">Role:</label>
+                <input type="text" id="role" name="role" required>
+            </div>
+            <div class="align-right">
+            <button type="submit">Save</button>
+            </div>
+        </form>
+    </main>
+
+</body>
+</html>
