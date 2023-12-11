@@ -3,7 +3,7 @@
 session_start();
 
 $host = 'localhost';
-$username = 'lab5_user';
+$username = 'FinalProject_user';
 $password = 'password123';
 $dbname = 'dolphin_crm';
 
