@@ -1,5 +1,5 @@
 <?php
-        session_destroy();
+     
 
 $host = 'localhost';
 $username = 'lab5_user';
@@ -27,13 +27,19 @@ switch ($type) {
         
             foreach ($results as $result) {
                 // Use print_r for debugging, or format output as needed
+
     
-                $_SESSION['id'] = $results['id'];
-                $_SESSION['firstname'] = $results['firstname'];
-                $_SESSION['lastname'] = $results['lastname'];
-                $_SESSION['password'] = $results['password'];
-                $_SESSION['email'] = $results['email'];
-                $_SESSION['role'] = $results['role'];
+                $_SESSION['id'] = $result['id'];
+                $_SESSION['firstname'] = $result['firstname'];
+                $_SESSION['lastname'] = $result['lastname'];
+                $_SESSION['password'] = $result['password'];
+                $_SESSION['email'] = $result['email'];
+                $_SESSION['role'] = $result['role'];
+
+                echo "login succeeded";
+
+
+
             }
             
             
@@ -79,6 +85,8 @@ switch ($type) {
 
         $_SESSION['id'] = $results['id'];
         session_destroy();
+        $_SESSION['id'] = $results['id'];
+
         break;
     case 'dashboard':
         $select = $_GET('select');
@@ -156,8 +164,9 @@ switch ($type) {
         break;
 
     case 'getCUsr':
-        
+
         echo $_SESSION['id']."||".$_SESSION['firstname']."||".$_SESSION['lastname']."||".$_SESSION['password']."||".$_SESSION['email']."||".$_SESSION['role'];
+        break;
 
     case 'listnote':
 
