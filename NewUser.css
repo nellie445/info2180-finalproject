@@ -108,6 +108,23 @@ input {
     width: 100%;
 }
 
+.group1 {
+    display: flex;
+    flex-direction: row ;
+    justify-content: space-between;
+    
+}
+.group2{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+}
+.group3{
+    display: flex;
+    flex-direction: row;
+}
+
 .form-group {
     display: grid;
     grid-template-rows: auto;
