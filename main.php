@@ -1,5 +1,5 @@
 <?php
-
+        session_destroy();
 
 $host = 'localhost';
 $username = 'lab5_user';
@@ -76,6 +76,8 @@ switch ($type) {
 
         break;
     case 'userlogout':
+
+        $_SESSION['id'] = $results['id'];
         session_destroy();
         break;
     case 'dashboard':
@@ -152,6 +154,10 @@ switch ($type) {
 
 
         break;
+
+    case 'getCUsr':
+        
+        echo $_SESSION['id']."||".$_SESSION['firstname']."||".$_SESSION['lastname']."||".$_SESSION['password']."||".$_SESSION['email']."||".$_SESSION['role'];
 
     case 'listnote':
 
