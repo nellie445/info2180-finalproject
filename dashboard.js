@@ -18,7 +18,11 @@ function fetcher(){
 
             tbody.innerHTML = data;
 
+            linkadder();
+
             console.log(data);
+
+
 
 
         }
@@ -55,6 +59,11 @@ support_button.addEventListener('click', function() {
 })
 
 
+
+
+
+
+
 function start(){
     type = 'all';
     select = 'all';
@@ -62,4 +71,22 @@ function start(){
 }
 
 start();
+
+
+
+
+function linkadder(){
+
+
+    const view = document.querySelectorAll('.view');
+
+    view.forEach(function (a) {
+        let inputData = a.getAttribute('data-value');
+        a.href = `Contact-Details.html?data=${inputData}`;
+        
+    
+    });
+
+}
+
 

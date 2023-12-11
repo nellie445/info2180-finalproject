@@ -293,7 +293,7 @@ switch ($type) {
       <td id="name"><?= $result['firstname'] . " " . $result['lastname'] ; ?></td>
       <td><?= $result['email']; ?></td>
       <td><?= $result['company']; ?></td>
-      <td id="type"><button><?= $result['type']; ?></button><a href="View"></a></td>
+      <td id="type"><button><?= $result['type']; ?> </button><a href="" data-value=<?= $result['email']; ?>  class="view">View</a></td>
     </tr>
     <?php endforeach; ?>
 
