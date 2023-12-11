@@ -7,8 +7,8 @@ document.addEventListener('DOMContentLoaded', () =>{
         var email = document.getElementById('email');
         var pword = document.getElementById('password');
 
-        fetch("main.php?querytypes="+encodeURIComponent("")+"&email=".encodeURIComponent("")+"&password="+encodeURIComponent(""),  {method: 'GET'})
-            .then(reasponce=>{
+        fetch("main.php?querytypes="+encodeURIComponent("userlogin")+"&email="+encodeURIComponent("email")+"&password="+encodeURIComponent("pword"),  {method: 'GET'})
+            .then(response=>{
                 if (response.ok) {
                     return response.text()
                 } else {

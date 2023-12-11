@@ -59,3 +59,12 @@ li > img{
 #welcome{
     text-align: center;
 }
+
+#admin > button{
+    width: 25%;
+    height: 25px;
+    background-color: #4f46e5;
+    border-radius: 5px;
+    border-color: transparent;
+    color: white;
+}
