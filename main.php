@@ -29,9 +29,6 @@ switch ($type) {
         foreach ($results as $result) {
             // Use print_r for debugging, or format output as needed
 
-
-
-
             $_SESSION['id'] = $results['id'];
             $_SESSION['firstname'] = $results['firstname'];
             $_SESSION['lastname'] = $results['lastname'];
@@ -42,6 +39,7 @@ switch ($type) {
         break;
         
     case 'adduser':
+
         $firstname = $_GET['firstname'];
         $lastname = $_GET['lastname'];
         $email = $_GET['email'];
@@ -58,8 +56,18 @@ switch ($type) {
         break;
 
     case 'listuser':
-        $stmt = $conn->query("SELECT * FROM user WHERE user.email = '%$email%'AND user.passord = '%$password%';");
-        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        //if($_SESSION['role'] == "admin"){
+        if(true){
+            $stmt = $conn->query("SELECT * FROM users");
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            echo "permission needed";
+        }
+
+
+        foreach ($results as $result) {
+            print_r($result);
+        }
 
         break;
     case 'userlogout':
@@ -196,10 +204,10 @@ switch ($type) {
   <tbody>
     <?php foreach ($results as $result): ?>
     <tr>
-      <td><?= $result['name']; ?></td>
+      <td><?= $result['firstname'] . " " . $result['lastname'] ; ?></td>
       <td><?= $result['email']; ?></td>
       <td><?= $result['role']; ?></td>
-      <td><?= $result['created']; ?></td>
+      <td><?= $result['created_at']; ?></td>
     </tr>
     <?php endforeach; ?>
   </tbody>
