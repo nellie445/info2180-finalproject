@@ -41,6 +41,9 @@ function saveNote() {
             return Promise.reject('Failed to save the note!');
         }
     })
+    .then(data=>{
+                window.location = "Notes.html";
+    })
     .catch(error => console.log('There was an error: ' + error));
 }
   

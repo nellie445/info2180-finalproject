@@ -125,8 +125,6 @@ switch ($type) {
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
    
 
-        
-
         foreach ($results as $result) {
             echo $result['firstname'] . " " . $result['lastname'] . " " . $result['firstname'];
             
@@ -138,6 +136,7 @@ switch ($type) {
     
     case 'newcontact':
 
+        $title = $_GET['title'];
         $firstname = $_GET['firstname'];
         $lastname = $_GET['lastname'];
         $email = $_GET['email'];
@@ -146,13 +145,33 @@ switch ($type) {
         $type = $_GET['type'];
         $assigned_to = $_GET['assigned_to'];
         $created_by = $_SESSION['id'];
-        $created_at = time();
-        $updated_at = time();
 
 
-        $stmt = $conn->query("INSERT INTO your_table_name (firstname, lastname, email, telephone, company, type, assigned_to, created_by, created_at, updated_at) VALUES ('$firstname', '$lastname', '$email', '$telephone', '$company', '$type', '$assigned_to', '$created_by', '$created_at', '$updated_at');");
+        echo "Title: $title<br>";
+        echo "First Name: $firstname<br>";
+        echo "Last Name: $lastname<br>";
+        echo "Email: $email<br>";
+        echo "Telephone: $telephone<br>";
+        echo "Company: $company<br>";
+        echo "Type: $type<br>";
+        echo "Assigned To: $assigned_to<br>";
+        echo "Created By: $created_by<br>";
 
-    
+
+
+        $stmt = $conn->prepare("INSERT INTO contacts (title, firstname, lastname, email, telephone, company, type, assigned_to, created_by) VALUES (:title, :firstname, :lastname, :email, :telephone, :company, :type, :assigned_to, :created_by)");
+
+        $stmt->bindParam(':title', $title);
+        $stmt->bindParam(':firstname', $firstname);
+        $stmt->bindParam(':lastname', $lastname);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':telephone', $telephone);
+        $stmt->bindParam(':company', $company);
+        $stmt->bindParam(':type', $type);
+        $stmt->bindParam(':assigned_to', $assigned_to);
+        $stmt->bindParam(':created_by', $created_by);
+
+
         if ($stmt->execute()) {
             echo "New record created successfully";
         } else {
