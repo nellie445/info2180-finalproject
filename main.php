@@ -120,9 +120,19 @@ switch ($type) {
         break;
     case 'startnewcontact':
 
-        $stmt = $conn->query("SELECT assigned_to FROM contacts;");
-
+       
+        $stmt = $conn->query("SELECT firstname , lastname, id FROM users");
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+   
+
+        
+
+        foreach ($results as $result) {
+            echo $result['firstname'] . " " . $result['lastname'] . " " . $result['firstname'];
+            
+            
+
+        }  
    
         break;
     
