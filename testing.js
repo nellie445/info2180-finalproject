@@ -7,19 +7,55 @@ function saveNote() {
     // Simulate updating the contact's updated_at timestamp
     const updatedAt = new Date().toLocaleString();
   
-    // Simulate adding the new note to the list of existing notes
-    const newNote = document.createElement('div');
-    newNote.className = 'note';
-    newNote.innerHTML = `
-      <p>${noteContent}</p>
-      <span class="datetime">${updatedAt}</span>
-    `;
+    // Create an object with the note content
+    const data = {
+        noteContent: encodeURIComponent(noteContent),
+    };
   
-    // Append the new note to the existing notes section
-    const existingNotes = document.querySelector('.existing-notes');
-    existingNotes.appendChild(newNote);
+    // Make a fetch request to save the note
+    fetch('main.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams(data).toString(),
+    })
+    .then(response => {
+        if (response.ok) {
+            // Update the datetime and display the new note
+            const updatedAt = new Date().toLocaleString();
+            const newNote = document.createElement('div');
+            newNote.className = 'note';
+            newNote.innerHTML = `
+                <p>${noteContent}</p>
+                <span class="datetime">${updatedAt}</span>
+            `;
   
-    // Clear the textarea after saving the note
-    document.getElementById('noteContent').value = '';
-  }
+            // Append the new note to the existing notes section
+            const existingNotes = document.querySelector('.existing-notes');
+            existingNotes.appendChild(newNote);
+  
+            // Clear the textarea after saving the note
+            document.getElementById('noteContent').value = '';
+        } else {
+            return Promise.reject('Failed to save the note!');
+        }
+    })
+    .catch(error => console.log('There was an error: ' + error));
+}
+  
+// Make a fetch request to retrieve data from the server
+fetch('main.php?querytypes=' + encodeURIComponent('') + '&email=' + encodeURIComponent('') + '&password=' + encodeURIComponent(''), { method: 'GET' })
+    .then(response => {
+        if (response.ok) {
+            return response.text();
+        } else {
+            return Promise.reject('Failed to retrieve data!');
+        }
+    })
+    .then(data => {
+        // Process the data
+        console.log(data);
+    })
+    .catch(error => console.log('There was an error: ' + error));
   
