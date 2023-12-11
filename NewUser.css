@@ -1,0 +1,143 @@
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/*Header*/
+
+header{
+    margin-left: -10px;
+    margin-right: -10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: -8px;
+    align-items: center;
+    background-color: rgb(31, 41, 55);
+    display: flex;
+}
+
+header > img{
+    height: 30px;
+    width: 30px;
+}
+
+h1{
+    display: inline-block;
+    color: white;
+    font-size: 18px;
+    margin-left: 5px;
+}
+
+/*Side Bar*/
+
+#left_bar{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    align-items: center;
+    background-color: white;
+}
+
+ul{
+    list-style-type: none;
+}
+
+li{
+    margin-top: 20px;
+}
+
+li > a{
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+}
+
+li > img{
+    margin-right: 5px;
+    height: 20px;
+}
+/*Main*/
+
+main {
+    margin-left: 20%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+h2 {
+    display: inline-block;
+    color: black;
+    font-size: 18px;
+    margin-left: 0px;
+    margin-top: -50px;
+}
+
+/*form {
+    display: grid;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+label > firstname {
+    display: block;
+    margin-bottom: 8px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}*/
+
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    width: 100%;
+    
+}
+
+label {
+    margin-bottom: 8px;
+}
+
+input {
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.form-group {
+    display: grid;
+    grid-template-rows: auto;
+    margin-bottom: 15px;
+}
+.form-group > label {
+    display: grid;
+    grid-template-rows: auto;
+}
+
+.form-group > label > input{
+    margin: 0;
+    display: grid;
+    grid-template-rows: auto;
+}
+
+.form-group label, .form-group input {
+    width: 100%;
+}
+
+button {
+    background-color: #3498db;
+    color: #fff;
+    font-size: 14px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #2980b9;
+  }
