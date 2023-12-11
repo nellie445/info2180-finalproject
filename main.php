@@ -1,6 +1,5 @@
 <?php
 
-session_start();
 
 $host = 'localhost';
 $username = 'lab5_user';
@@ -22,22 +21,29 @@ switch ($type) {
         $stmt = $conn->prepare("SELECT * FROM users WHERE users.email = :email AND users.password = :password");
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':password', $password);
-        $stmt->execute();
+        if($stmt->execute()){
+            session_start();
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
-        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
-        foreach ($results as $result) {
-            // Use print_r for debugging, or format output as needed
-
-            $_SESSION['id'] = $results['id'];
-            $_SESSION['firstname'] = $results['firstname'];
-            $_SESSION['lastname'] = $results['lastname'];
-            $_SESSION['password'] = $results['password'];
-            $_SESSION['email'] = $results['email'];
-            $_SESSION['role'] = $results['role'];
+            foreach ($results as $result) {
+                // Use print_r for debugging, or format output as needed
+    
+                $_SESSION['id'] = $results['id'];
+                $_SESSION['firstname'] = $results['firstname'];
+                $_SESSION['lastname'] = $results['lastname'];
+                $_SESSION['password'] = $results['password'];
+                $_SESSION['email'] = $results['email'];
+                $_SESSION['role'] = $results['role'];
+            }
+            
+            
+        } else{
+            echo "login failed";
+            
         }
+
         break;
-        
+
     case 'adduser':
 
         $firstname = $_GET['firstname'];
@@ -56,8 +62,7 @@ switch ($type) {
         break;
 
     case 'listuser':
-        //if($_SESSION['role'] == "admin"){
-        if(true){
+        if($_SESSION['role'] == "admin"){
             $stmt = $conn->query("SELECT * FROM users");
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         } else {
