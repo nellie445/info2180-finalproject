@@ -55,4 +55,11 @@ support_button.addEventListener('click', function() {
 })
 
 
+function start(){
+    type = 'all';
+    select = 'all';
+    fetcher();
+}
+
+start();
 

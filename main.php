@@ -290,10 +290,10 @@ switch ($type) {
 
     <?php foreach ($results as $result): ?>
     <tr>
-      <td><?= $result['firstname'] . " " . $result['lastname'] ; ?></td>
+      <td id="name"><?= $result['firstname'] . " " . $result['lastname'] ; ?></td>
       <td><?= $result['email']; ?></td>
       <td><?= $result['company']; ?></td>
-      <td><?= $result['type']; ?></td>
+      <td id="type"><button><?= $result['type']; ?></button><a href="View"></a></td>
     </tr>
     <?php endforeach; ?>
 
