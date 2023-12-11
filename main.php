@@ -19,7 +19,7 @@ switch ($type) {
         $email = $_GET['email'];
         $password = $_GET['password'];  
         
-        $stmt = $conn->prepare("SELECT * FROM users WHERE users.email = :email AND users.password = :password");
+        $stmt = $conn->prepare("SELECT * FROM users WHERE users.email = :email");
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':password', $password);
         if($stmt->execute()){
@@ -28,15 +28,23 @@ switch ($type) {
             foreach ($results as $result) {
                 // Use print_r for debugging, or format output as needed
 
-    
-                $_SESSION['id'] = $result['id'];
-                $_SESSION['firstname'] = $result['firstname'];
-                $_SESSION['lastname'] = $result['lastname'];
-                $_SESSION['password'] = $result['password'];
-                $_SESSION['email'] = $result['email'];
-                $_SESSION['role'] = $result['role'];
+                if (password_verify($password, $result['password'])){
+                    $_SESSION['id'] = $result['id'];
+                    $_SESSION['firstname'] = $result['firstname'];
+                    $_SESSION['lastname'] = $result['lastname'];
+                    $_SESSION['password'] = $result['password'];
+                    $_SESSION['email'] = $result['email'];
+                    $_SESSION['role'] = $result['role'];
 
-                echo "login succeeded";
+                    echo "login succeeded";
+                }
+                else{
+                     echo "wrong password" 
+                }
+
+              
+    
+
 
 
 
@@ -58,7 +66,10 @@ switch ($type) {
         $password = $_GET['password'];
         $role = $_GET['role'];
 
-        $stmt = $conn->prepare("INSERT INTO users (firstname, lastname, email, password, role) VALUES ( '$firstname','$lastname', '$email', '$password', '$role')");
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+
+        $stmt = $conn->prepare("INSERT INTO users (firstname, lastname, email, password, role) VALUES ( '$firstname','$lastname', '$email', '$hashedPassword', '$role')");
 
         if ($stmt->execute()) {
             echo "New record created successfully";
