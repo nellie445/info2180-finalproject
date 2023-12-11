@@ -42,7 +42,7 @@ function saveNote() {
         }
     })
     .then(data=>{
-                window.location = "home.html";
+                window.location = "Notes.html";
     })
     .catch(error => console.log('There was an error: ' + error));
 }
