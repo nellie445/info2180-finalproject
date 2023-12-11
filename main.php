@@ -9,7 +9,7 @@ $dbname = 'dolphin_crm';
 
 
 $type = $_GET['querytypes'];
-echo $type;
+
 $queryTypes = isset($_GET['querytypes']) ? $_GET['querytypes'] : null;
 
 $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
@@ -17,23 +17,38 @@ $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $p
 switch ($type) {
     case "userlogin":
         $email = $_GET['email'];
-        $password = $_GET['passord'];   
-        $stmt = $conn->query("SELECT * FROM user WHERE user.email = '%$email%'AND user.passord = '%$password%';");
+        $password = $_GET['password'];  
+        
+        $stmt = $conn->prepare("SELECT * FROM users WHERE users.email = :email AND users.password = :password");
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':password', $password);
+        $stmt->execute();
+        
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        foreach ($results as $result) {
+            // Use print_r for debugging, or format output as needed
 
-        echo 1;
 
 
+
+            $_SESSION['id'] = $results['id'];
+            $_SESSION['firstname'] = $results['firstname'];
+            $_SESSION['lastname'] = $results['lastname'];
+            $_SESSION['password'] = $results['password'];
+            $_SESSION['email'] = $results['email'];
+            $_SESSION['role'] = $results['role'];
+        }
         break;
-
+        
     case 'adduser':
         $firstname = $_GET['firstname'];
         $lastname = $_GET['lastname'];
         $email = $_GET['email'];
-        $password = $_GET['passord'];
+        $password = $_GET['password'];
         $role = $_GET['role'];
 
-        $stmt = $conn->query("INSERT INTO myTable (firstname, lastname, email, password, role) VALUES ( '%$firstname%','%$lastname%', '%$email%', '%$password%', '%$role%')");
+        $stmt = $conn->prepare("INSERT INTO users (firstname, lastname, email, password, role) VALUES ( '$firstname','$lastname', '$email', '$password', '$role')");
 
         if ($stmt->execute()) {
             echo "New record created successfully";
