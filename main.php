@@ -223,7 +223,7 @@ switch ($type) {
 
     case 'addnote':
         $id = $_SESSION['id'];
-        $created_at = time();
+        $updated_at = time();
         $comment = $_GET['comment'];
         $contact_id = $_GET['contact_id'];
         
@@ -234,6 +234,13 @@ switch ($type) {
         
         if ($stmt->execute()) {
             echo "New note created successfully";
+        } else {
+        }
+
+
+        $stmt = $conn->prepare("UPDATE contacts SET updated_at = '$updated_at' WHERE email = '$id'");
+        if ($stmt->execute()) {
+            echo "and contacts update successfully";
         } else {
         }
 
