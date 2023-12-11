@@ -1,5 +1,6 @@
 <?php
      
+session_start();
 
 $host = 'localhost';
 $username = 'lab5_user';
@@ -22,7 +23,6 @@ switch ($type) {
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':password', $password);
         if($stmt->execute()){
-            session_start();
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
             foreach ($results as $result) {
@@ -83,9 +83,9 @@ switch ($type) {
         break;
     case 'userlogout':
 
-        $_SESSION['id'] = $results['id'];
+        echo $_SESSION['id'];
         session_destroy();
-        $_SESSION['id'] = $results['id'];
+        echo $_SESSION['id'];
 
         break;
     case 'dashboard':
